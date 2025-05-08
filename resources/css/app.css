@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* FilePond Dark Theme */
+.filepond--root {
+    @apply bg-gray-800 rounded-md;
+}
+
+.filepond--panel-root {
+    @apply bg-gray-800 border-2 border-gray-700;
+}
+
+.filepond--drop-label {
+    @apply text-gray-300;
+}
+
+.filepond--label-action {
+    @apply text-indigo-400;
+}
+
+/* Dark mode styles for validation messages */
+.filepond--file-info {
+    @apply text-gray-300;
+}
+
+.filepond--file-status {
+    @apply text-gray-400;
+}
