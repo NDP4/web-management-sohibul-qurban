@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Kwitansi;
 use App\Models\SohibulQurban;
+use App\Exports\KeuanganExport;
+use App\Exports\SohibulQurbanExport;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use PDF;
 
 class KwitansiController extends Controller
@@ -52,5 +55,53 @@ class KwitansiController extends Controller
         $filename = str_replace(' ', '_', strtolower($kwitansi->sohibulQurban->nama_sohibul)) . '_kwitansi.pdf';
 
         return $pdf->download($filename);
+    }
+
+    public function exportSohibulQurbanPDF()
+    {
+        $sohibulQurban = SohibulQurban::orderBy('rt')
+            ->orderBy('rw')
+            ->orderBy('alamat')
+            ->get();
+
+        $pdf = PDF::loadView('kwitansi.export.sohibul-qurban-pdf', compact('sohibulQurban'))
+            ->setPaper('a4', 'landscape');
+
+        return $pdf->download('rekap-sohibul-qurban.pdf');
+    }
+
+    public function exportSohibulQurbanExcel()
+    {
+        $fileName = 'rekap-sohibul-qurban.xlsx';
+
+        $sohibulQurban = SohibulQurban::orderBy('rt')
+            ->orderBy('rw')
+            ->orderBy('alamat')
+            ->get();
+
+        return Excel::download(new SohibulQurbanExport($sohibulQurban), $fileName);
+    }
+
+    public function exportKeuanganPDF()
+    {
+        $keuangan = Kwitansi::with('sohibulQurban')
+            ->orderBy('tanggal_pembayaran')
+            ->get();
+
+        $pdf = PDF::loadView('kwitansi.export.keuangan-pdf', compact('keuangan'))
+            ->setPaper('a4', 'landscape');
+
+        return $pdf->download('rekap-keuangan-qurban.pdf');
+    }
+
+    public function exportKeuanganExcel()
+    {
+        $fileName = 'rekap-keuangan-qurban.xlsx';
+
+        $keuangan = Kwitansi::with('sohibulQurban')
+            ->orderBy('tanggal_pembayaran')
+            ->get();
+
+        return Excel::download(new KeuanganExport($keuangan), $fileName);
     }
 }

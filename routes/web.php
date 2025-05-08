@@ -29,6 +29,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/kwitansi', [KwitansiController::class, 'index'])->name('kwitansi.index');
     Route::post('/kwitansi', [KwitansiController::class, 'store'])->name('kwitansi.store');
     Route::get('/kwitansi/{kwitansi}/download', [KwitansiController::class, 'download'])->name('kwitansi.download');
+
+    Route::get('/sohibul-qurban/export/pdf', [KwitansiController::class, 'exportSohibulQurbanPDF'])->name('sohibul-qurban.export.pdf');
+    Route::get('/sohibul-qurban/export/excel', [KwitansiController::class, 'exportSohibulQurbanExcel'])->name('sohibul-qurban.export.excel');
+    Route::get('/keuangan/export/pdf', [KwitansiController::class, 'exportKeuanganPDF'])->name('keuangan.export.pdf');
+    Route::get('/keuangan/export/excel', [KwitansiController::class, 'exportKeuanganExcel'])->name('keuangan.export.excel');
 });
 
 require __DIR__ . '/auth.php';

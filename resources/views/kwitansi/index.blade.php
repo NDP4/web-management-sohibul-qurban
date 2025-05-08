@@ -16,6 +16,33 @@
             <!-- Form Pembuatan Kwitansi -->
             <div class="overflow-hidden bg-gray-800 shadow-sm sm:rounded-lg mb-6">
                 <div class="p-6 text-gray-100">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-semibold">Buat Kwitansi Baru</h3>
+                        <div class="flex space-x-4">
+                            <div>
+                                <h4 class="text-sm font-semibold mb-2">Data Sohibul</h4>
+                                <div class="flex space-x-2">
+                                    <a href="{{ route('sohibul-qurban.export.pdf') }}" class="px-3 py-2 bg-red-600 text-white rounded hover:bg-red-700 text-sm">
+                                        Export PDF
+                                    </a>
+                                    <a href="{{ route('sohibul-qurban.export.excel') }}" class="px-3 py-2 bg-green-600 text-white rounded hover:bg-green-700 text-sm">
+                                        Export Excel
+                                    </a>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-semibold mb-2">Data Keuangan</h4>
+                                <div class="flex space-x-2">
+                                    <a href="{{ route('keuangan.export.pdf') }}" class="px-3 py-2 bg-red-600 text-white rounded hover:bg-red-700 text-sm">
+                                        Export PDF
+                                    </a>
+                                    <a href="{{ route('keuangan.export.excel') }}" class="px-3 py-2 bg-green-600 text-white rounded hover:bg-green-700 text-sm">
+                                        Export Excel
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <h3 class="text-lg font-semibold mb-4">Buat Kwitansi Baru</h3>
                     <form action="{{ route('kwitansi.store') }}" method="POST">
                         @csrf
