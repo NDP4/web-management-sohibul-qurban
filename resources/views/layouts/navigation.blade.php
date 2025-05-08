@@ -79,6 +79,9 @@
             <x-responsive-nav-link :href="route('sohibul-qurban.index')" :active="request()->routeIs('sohibul-qurban.*')" class="text-gray-300 hover:text-white">
                 {{ __('Sohibul Qurban') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('kwitansi.index')" :active="request()->routeIs('kwitansi.*')" class="text-gray-300 hover:text-white">
+                {{ __('Kwitansi') }}
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
