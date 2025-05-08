@@ -8,9 +8,38 @@ use Illuminate\Support\Facades\Storage;
 
 class SohibulQurbanController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $qurbanData = SohibulQurban::latest()->paginate(10);
+        $query = SohibulQurban::query();
+
+        // Search
+        if ($request->has('search')) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('nama_sohibul', 'like', "%{$search}%")
+                    ->orWhere('qurban_untuk', 'like', "%{$search}%")
+                    ->orWhere('rt', 'like', "%{$search}%")
+                    ->orWhere('rw', 'like', "%{$search}%")
+                    ->orWhere('alamat', 'like', "%{$search}%");
+            });
+        }
+
+        // Filters
+        if ($request->has('jenis_hewan') && $request->jenis_hewan != '') {
+            $query->where('jenis_hewan', $request->jenis_hewan);
+        }
+
+        if ($request->has('status_pembayaran') && $request->status_pembayaran != '') {
+            $query->where('status_pembayaran', $request->status_pembayaran);
+        }
+
+        // Sorting
+        $sortField = $request->get('sort', 'nama_sohibul');
+        $sortDirection = $request->get('direction', 'asc');
+        $query->orderBy($sortField, $sortDirection);
+
+        $qurbanData = $query->paginate(10)->withQueryString();
+
         return view('sohibul-qurban.index', compact('qurbanData'));
     }
 

@@ -8,8 +8,17 @@
     <div class="py-12">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             @if (session('success'))
-                <div class="p-4 mb-6 text-sm text-green-400 bg-gray-800 rounded-lg">
-                    {{ session('success') }}
+                <div x-data="{ show: true }"
+                     x-show="show"
+                     x-init="setTimeout(() => show = false, 5000)"
+                     class="relative p-4 mb-6 text-sm text-green-400 bg-gray-800 rounded-lg"
+                     role="alert">
+                    <span class="block sm:inline">{{ session('success') }}</span>
+                    <button @click="show = false" class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                        <svg class="w-4 h-4 fill-current" role="button" viewBox="0 0 20 20">
+                            <path d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                        </svg>
+                    </button>
                 </div>
             @endif
 
