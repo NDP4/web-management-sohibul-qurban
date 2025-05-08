@@ -218,7 +218,7 @@
                                     <td>Qurban {{ ucfirst($kwitansi->sohibulQurban->jenis_hewan) }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Tipe</td>
+                                    <td>Kategori</td>
                                     <td>:</td>
                                     <td>
                                         @if($kwitansi->sohibulQurban->jenis_hewan == 'sapi')
