@@ -66,8 +66,8 @@ class KwitansiController extends Controller
 
     public function exportSohibulQurbanPDF()
     {
-        $sohibulQurban = SohibulQurban::orderBy('rt')
-            ->orderBy('rw')
+        $sohibulQurban = SohibulQurban::orderByRaw('CAST(rw AS UNSIGNED) asc')
+            ->orderByRaw('CAST(rt AS UNSIGNED) asc')
             ->orderBy('alamat')
             ->get();
 
@@ -81,8 +81,8 @@ class KwitansiController extends Controller
     {
         $fileName = 'rekap-sohibul-qurban.xlsx';
 
-        $sohibulQurban = SohibulQurban::orderBy('rt')
-            ->orderBy('rw')
+        $sohibulQurban = SohibulQurban::orderByRaw('CAST(rw AS UNSIGNED) asc')
+            ->orderByRaw('CAST(rt AS UNSIGNED) asc')
             ->orderBy('alamat')
             ->get();
 
