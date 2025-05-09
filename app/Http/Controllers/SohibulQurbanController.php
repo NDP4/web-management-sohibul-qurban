@@ -38,9 +38,9 @@ class SohibulQurbanController extends Controller
         $sortDirection = $request->get('direction', 'asc');
 
         if ($sortField === 'rt') {
-            // Cast RT and RW to integers for proper numerical sorting
-            $query->orderByRaw('CAST(rt AS UNSIGNED) ' . $sortDirection)
-                ->orderByRaw('CAST(rw AS UNSIGNED) asc');
+            // First sort by RW, then by RT for consistent grouping
+            $query->orderByRaw('CAST(rw AS UNSIGNED) asc')
+                ->orderByRaw('CAST(rt AS UNSIGNED) asc');
         } else {
             $query->orderBy($sortField, $sortDirection);
         }
@@ -52,8 +52,8 @@ class SohibulQurbanController extends Controller
 
     public function exportSohibulQurbanPDF()
     {
-        $sohibulQurban = SohibulQurban::orderByRaw('CAST(rt AS UNSIGNED) asc')
-            ->orderByRaw('CAST(rw AS UNSIGNED) asc')
+        $sohibulQurban = SohibulQurban::orderByRaw('CAST(rw AS UNSIGNED) asc')
+            ->orderByRaw('CAST(rt AS UNSIGNED) asc')
             ->get();
 
         $pdf = PDF::loadView('kwitansi.export.sohibul-qurban-pdf', compact('sohibulQurban'))
@@ -66,8 +66,8 @@ class SohibulQurbanController extends Controller
     {
         $fileName = 'rekap-sohibul-qurban.xlsx';
 
-        $sohibulQurban = SohibulQurban::orderByRaw('CAST(rt AS UNSIGNED) asc')
-            ->orderByRaw('CAST(rw AS UNSIGNED) asc')
+        $sohibulQurban = SohibulQurban::orderByRaw('CAST(rw AS UNSIGNED) asc')
+            ->orderByRaw('CAST(rt AS UNSIGNED) asc')
             ->get();
 
         return Excel::download(new SohibulQurbanExport($sohibulQurban), $fileName);
