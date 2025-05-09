@@ -14,10 +14,17 @@ class KwitansiController extends Controller
 {
     public function index()
     {
-        $kwitansiHistory = Kwitansi::with('sohibulQurban')->latest()->get();
+        $kwitansiHistory = Kwitansi::with('sohibulQurban')
+            ->join('sohibul_qurban', 'kwitansi.sohibul_qurban_id', '=', 'sohibul_qurban.id')
+            ->orderByRaw('CAST(sohibul_qurban.rt AS UNSIGNED) asc')
+            ->orderByRaw('CAST(sohibul_qurban.rw AS UNSIGNED) asc')
+            ->select('kwitansi.*')
+            ->get();
 
         $availableSohibul = SohibulQurban::where('status_pembayaran', 'sudah_bayar')
             ->whereDoesntHave('kwitansi')
+            ->orderByRaw('CAST(rt AS UNSIGNED) asc')
+            ->orderByRaw('CAST(rw AS UNSIGNED) asc')
             ->get();
 
         return view('kwitansi.index', compact('kwitansiHistory', 'availableSohibul'));

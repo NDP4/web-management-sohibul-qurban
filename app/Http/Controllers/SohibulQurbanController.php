@@ -34,13 +34,43 @@ class SohibulQurbanController extends Controller
         }
 
         // Sorting
-        $sortField = $request->get('sort', 'nama_sohibul');
+        $sortField = $request->get('sort', 'rt');
         $sortDirection = $request->get('direction', 'asc');
-        $query->orderBy($sortField, $sortDirection);
+
+        if ($sortField === 'rt') {
+            // Cast RT and RW to integers for proper numerical sorting
+            $query->orderByRaw('CAST(rt AS UNSIGNED) ' . $sortDirection)
+                ->orderByRaw('CAST(rw AS UNSIGNED) asc');
+        } else {
+            $query->orderBy($sortField, $sortDirection);
+        }
 
         $qurbanData = $query->paginate(10)->withQueryString();
 
         return view('sohibul-qurban.index', compact('qurbanData'));
+    }
+
+    public function exportSohibulQurbanPDF()
+    {
+        $sohibulQurban = SohibulQurban::orderByRaw('CAST(rt AS UNSIGNED) asc')
+            ->orderByRaw('CAST(rw AS UNSIGNED) asc')
+            ->get();
+
+        $pdf = PDF::loadView('kwitansi.export.sohibul-qurban-pdf', compact('sohibulQurban'))
+            ->setPaper('a4', 'landscape');
+
+        return $pdf->download('rekap-sohibul-qurban.pdf');
+    }
+
+    public function exportSohibulQurbanExcel()
+    {
+        $fileName = 'rekap-sohibul-qurban.xlsx';
+
+        $sohibulQurban = SohibulQurban::orderByRaw('CAST(rt AS UNSIGNED) asc')
+            ->orderByRaw('CAST(rw AS UNSIGNED) asc')
+            ->get();
+
+        return Excel::download(new SohibulQurbanExport($sohibulQurban), $fileName);
     }
 
     public function create()

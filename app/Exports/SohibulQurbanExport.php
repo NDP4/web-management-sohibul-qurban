@@ -12,7 +12,10 @@ class SohibulQurbanExport implements FromCollection, WithHeadings, WithMapping
 
     public function __construct($sohibulQurban)
     {
-        $this->sohibulQurban = $sohibulQurban;
+        // Sort the collection by RT and RW numerically
+        $this->sohibulQurban = $sohibulQurban->sortBy(function ($item) {
+            return sprintf('%010d%010d', (int)$item->rt, (int)$item->rw);
+        });
     }
 
     public function collection()
