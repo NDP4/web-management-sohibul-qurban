@@ -94,7 +94,7 @@
                 <div class="p-6 text-gray-100">
                     <h3 class="mb-4 text-lg font-semibold">Riwayat Kwitansi</h3>
                     <div class="overflow-x-auto">
-                        <table class="min-w-full divide-y divide-gray-700">
+                        <table id="kwitansiTable" class="min-w-full divide-y divide-gray-700">
                             <thead>
                                 <tr>
                                     <th class="px-4 py-3 text-sm font-semibold text-left text-gray-300">No. Kwitansi</th>
@@ -126,4 +126,32 @@
             </div>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#kwitansiTable').DataTable({
+                responsive: true,
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/id.json'
+                },
+                order: [[2, 'desc']], // Sort by date column (index 2) in descending order
+                columnDefs: [
+                    {
+                        targets: 3, // Nominal column
+                        render: function(data, type, row) {
+                            if (type === 'sort') {
+                                return data.replace(/[^\d]/g, ''); // Remove non-numeric characters for sorting
+                            }
+                            return data;
+                        }
+                    },
+                    {
+                        targets: 4, // Action column
+                        orderable: false,
+                        searchable: false
+                    }
+                ]
+            });
+        });
+    </script>
 </x-app-layout>
