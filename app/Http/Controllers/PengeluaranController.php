@@ -25,23 +25,14 @@ class PengeluaranController extends Controller
         $request->validate([
             'keterangan' => 'required',
             'jumlah' => 'required|numeric',
-            'bukti' => 'required|file|mimes:jpeg,png,jpg,pdf|max:2048'
+            'drive_file_id' => 'required'
         ]);
 
-        if ($request->hasFile('bukti')) {
-            $file = $request->file('bukti');
-            $fileName = time() . '_' . $file->getClientOriginalName();
-
-            // Upload to Google Drive
-            Storage::disk('google')->put('1tPwW1KHcYBqHBWEv5525f26tltRAsuuV/' . $fileName, file_get_contents($file));
-            $path = Storage::disk('google')->url('1tPwW1KHcYBqHBWEv5525f26tltRAsuuV/' . $fileName);
-
-            Pengeluaran::create([
-                'keterangan' => $request->keterangan,
-                'jumlah' => $request->jumlah,
-                'bukti_path' => $path
-            ]);
-        }
+        Pengeluaran::create([
+            'keterangan' => $request->keterangan,
+            'jumlah' => $request->jumlah,
+            'bukti_path' => $request->drive_file_id
+        ]);
 
         return redirect()->route('pengeluaran.index')->with('success', 'Data pengeluaran berhasil ditambahkan');
     }

@@ -34,12 +34,13 @@ class FileUploadController extends Controller
             }
 
             $file = $request->file('bukti_transfer');
-            $sohibulName = $request->input('sohibul_name', 'unknown');
+            $sohibulName = $request->input('sohibul_name');
+            $pengeluaranName = $request->input('pengeluaran_name');
 
             // Validate file type
-            $allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+            $allowedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'application/pdf'];
             if (!in_array($file->getMimeType(), $allowedTypes)) {
-                return response()->json(['error' => 'Invalid file type. Only JPG and PNG allowed'], 400);
+                return response()->json(['error' => 'Invalid file type. Only JPG, PNG and PDF allowed'], 400);
             }
 
             // Validate file size (max 3MB)
@@ -47,9 +48,13 @@ class FileUploadController extends Controller
                 return response()->json(['error' => 'File too large. Maximum size is 3MB'], 400);
             }
 
-            // Generate filename using sohibul name
+            // Generate filename
             $extension = $file->getClientOriginalExtension();
-            $filename = str_replace(' ', '_', strtolower($sohibulName)) . '_bukti_transfer_' . time() . '.' . $extension;
+            if ($sohibulName) {
+                $filename = str_replace(' ', '_', strtolower($sohibulName)) . '_bukti_transfer_' . time() . '.' . $extension;
+            } else {
+                $filename = str_replace(' ', '_', strtolower($pengeluaranName)) . '_bukti_pengeluaran_' . time() . '.' . $extension;
+            }
 
             // Upload to Google Drive
             try {

@@ -50,8 +50,11 @@
                                 },
                                 ondata: (formData) => {
                                     const namaSohibul = document.getElementById('nama_sohibul');
+                                    const keterangan = document.getElementById('keterangan');
                                     if (namaSohibul) {
                                         formData.append('sohibul_name', namaSohibul.value);
+                                    } else if (keterangan) {
+                                        formData.append('pengeluaran_name', keterangan.value || 'pengeluaran');
                                     }
                                     return formData;
                                 }
