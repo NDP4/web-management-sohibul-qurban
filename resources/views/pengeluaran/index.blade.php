@@ -42,7 +42,7 @@
                                     <td class="px-6 py-4">{{ $pengeluaran->keterangan }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap">Rp {{ number_format($pengeluaran->jumlah, 0, ',', '.') }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <a href="{{ $pengeluaran->bukti_path }}" target="_blank" class="text-blue-500 hover:text-blue-600">Lihat Bukti</a>
+                                        <a href="https://drive.google.com/file/d/{{ $pengeluaran->bukti_path }}/view" target="_blank" class="text-blue-500 hover:text-blue-600">Lihat Bukti</a>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex space-x-2">

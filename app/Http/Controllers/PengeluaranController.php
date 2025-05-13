@@ -34,7 +34,7 @@ class PengeluaranController extends Controller
                 'keterangan' => $request->keterangan,
                 'jumlah' => $request->jumlah,
                 'tanggal_pengeluaran' => $request->tanggal_pengeluaran ?? now(),
-                'bukti_path' => "https://drive.google.com/file/d/{$request->bukti}/view"
+                'bukti_path' => $request->bukti
             ]);
 
             return redirect()->route('pengeluaran.index')->with('success', 'Data pengeluaran berhasil ditambahkan');
@@ -64,7 +64,7 @@ class PengeluaranController extends Controller
             ];
 
             if ($request->bukti) {
-                $data['bukti_path'] = "https://drive.google.com/file/d/{$request->bukti}/view";
+                $data['bukti_path'] = $request->bukti;
             }
 
             $pengeluaran->update($data);

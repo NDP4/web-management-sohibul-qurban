@@ -44,7 +44,7 @@
                                 <input type="hidden" name="drive_file_id" />
                                 @if($pengeluaran->bukti_path)
                                     <div class="mt-2">
-                                        <a href="{{ $pengeluaran->bukti_path }}" target="_blank" class="text-blue-500 hover:text-blue-600">
+                                        <a href="https://drive.google.com/file/d/{{ $pengeluaran->bukti_path }}/view" target="_blank" class="text-blue-500 hover:text-blue-600">
                                             Lihat Bukti Saat Ini
                                         </a>
                                     </div>
