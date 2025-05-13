@@ -119,7 +119,7 @@
                             <span class="text-sm text-gray-500 dark:text-gray-400">© {{ date('Y') }} Masjid Ar-Ridho</span>
                         </div>
                         <div class="text-sm text-gray-500 dark:text-gray-400">
-                            Developed with Laravel v{{ Illuminate\Foundation\Application::VERSION }}
+                            Developed by corex
                         </div>
                     </div>
                 </div>
