@@ -28,11 +28,12 @@ class PengeluaranController extends Controller
             'drive_file_id' => 'required'
         ]);
 
-        Pengeluaran::create([
-            'keterangan' => $request->keterangan,
-            'jumlah' => $request->jumlah,
-            'bukti_path' => $request->drive_file_id
-        ]);
+        try {
+            $pengeluaran = Pengeluaran::create([
+                'keterangan' => $request->keterangan,
+                'jumlah' => $request->jumlah,
+                'bukti_path' => $request->drive_file_id
+            ]);
 
         return redirect()->route('pengeluaran.index')->with('success', 'Data pengeluaran berhasil ditambahkan');
     }

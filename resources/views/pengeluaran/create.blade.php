@@ -31,18 +31,35 @@
 
                             <div>
                                 <x-input-label for="bukti" value="Bukti Pengeluaran" class="text-gray-300" />
-                                <input type="file" name="bukti" id="bukti" class="filepond" accept="image/*, application/pdf" />
+                                <input type="file" name="bukti" id="bukti" class="filepond" accept="image/*, application/pdf" required />
                                 <x-input-error class="mt-2" :messages="$errors->get('bukti')" />
+                                <input type="hidden" name="drive_file_id" />
                             </div>
 
                             <div class="flex items-center justify-start gap-4">
-                                <x-primary-button>
+                                <x-primary-button id="submitBtn" disabled>
                                     {{ __('Simpan') }}
                                 </x-primary-button>
                                 <a href="{{ route('pengeluaran.index') }}" class="px-4 py-2 text-sm text-gray-700 bg-white border border-gray-300 rounded-md dark:text-gray-300 dark:border-gray-600 dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700">
                                     {{ __('Kembali') }}
                                 </a>
                             </div>
+
+                            <script>
+                                document.addEventListener('DOMContentLoaded', function() {
+                                    const submitBtn = document.getElementById('submitBtn');
+                                    const form = document.querySelector('form');
+                                    const keterangan = document.getElementById('keterangan');
+
+                                    // Enable submit button only when file is uploaded and keterangan is filled
+                                    function checkForm() {
+                                        const driveFileId = document.querySelector('input[name="drive_file_id"]').value;
+                                        const keteranganValue = keterangan.value.trim();
+                                        submitBtn.disabled = !driveFileId || !keteranganValue;
+                                    }
+
+                                    keterangan.addEventListener('input', checkForm);
+                                });
                         </div>
                     </form>
                 </div>

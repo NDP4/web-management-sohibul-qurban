@@ -41,7 +41,7 @@ class FileUploadController extends Controller
             }
 
             $sohibulName = $request->input('sohibul_name');
-            $pengeluaranName = $request->input('pengeluaran_name');
+            $pengeluaranName = $request->input('keterangan') ?? $request->input('pengeluaran_name');
 
             // Validate file type
             $allowedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'application/pdf'];
