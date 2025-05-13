@@ -2,6 +2,7 @@
 
 namespace App\Exports;
 
+use App\Models\Pengeluaran;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
@@ -9,45 +10,54 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 class KeuanganExport implements FromCollection, WithHeadings, WithMapping
 {
     protected $keuangan;
+    protected $pengeluaran;
 
     public function __construct($keuangan)
     {
         $this->keuangan = $keuangan;
+        $this->pengeluaran = Pengeluaran::orderBy('created_at')->get();
     }
 
     public function collection()
     {
-        return $this->keuangan;
+        $pemasukan = $this->keuangan->map(function ($item) {
+            return [
+                'Tanggal' => $item->tanggal_pembayaran,
+                'Jenis' => 'Pemasukan',
+                'Keterangan' => 'Pembayaran dari ' . $item->sohibulQurban->nama_sohibul,
+                'Jumlah' => $item->nominal,
+            ];
+        });
+
+        $pengeluaran = $this->pengeluaran->map(function ($item) {
+            return [
+                'Tanggal' => $item->created_at->format('Y-m-d'),
+                'Jenis' => 'Pengeluaran',
+                'Keterangan' => $item->keterangan,
+                'Jumlah' => -$item->jumlah,
+            ];
+        });
+
+        return $pemasukan->concat($pengeluaran)->sortBy('Tanggal');
     }
 
     public function headings(): array
     {
         return [
-            'No',
             'Tanggal',
-            'No Kwitansi',
-            'Nama Sohibul',
-            'Jenis Hewan',
-            'Tipe',
-            'Nominal'
+            'Jenis',
+            'Keterangan',
+            'Jumlah',
         ];
     }
 
     public function map($row): array
     {
-        static $counter = 0;
-        $counter++;
-
         return [
-            $counter,
-            $row->tanggal_pembayaran->format('d/m/Y'),
-            $row->nomor_kwitansi,
-            $row->sohibulQurban->nama_sohibul,
-            ucfirst($row->sohibulQurban->jenis_hewan),
-            $row->sohibulQurban->jenis_hewan == 'sapi'
-                ? ($row->sohibulQurban->is_collective ? 'Kolektif (1/7)' : 'Individual')
-                : 'Individual',
-            $row->nominal
+            $row['Tanggal'],
+            $row['Jenis'],
+            $row['Keterangan'],
+            $row['Jumlah'],
         ];
     }
 }

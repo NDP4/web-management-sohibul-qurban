@@ -21,6 +21,9 @@
                     <x-nav-link :href="route('kwitansi.index')" :active="request()->routeIs('kwitansi.*')" class="text-gray-300 hover:text-white">
                         {{ __('Kwitansi') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('pengeluaran.index')" :active="request()->routeIs('pengeluaran.*')" class="text-gray-300 hover:text-white">
+                        {{ __('Pengeluaran') }}
+                    </x-nav-link>
                 </div>
             </div>
 

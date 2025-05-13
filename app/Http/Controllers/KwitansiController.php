@@ -95,7 +95,12 @@ class KwitansiController extends Controller
             ->orderBy('tanggal_pembayaran')
             ->get();
 
-        $pdf = PDF::loadView('kwitansi.export.keuangan-pdf', compact('keuangan'))
+        $pengeluaran = \App\Models\Pengeluaran::orderBy('created_at')->get();
+        $totalPemasukan = $keuangan->sum('nominal');
+        $totalPengeluaran = $pengeluaran->sum('jumlah');
+        $saldo = $totalPemasukan - $totalPengeluaran;
+
+        $pdf = PDF::loadView('kwitansi.export.keuangan-pdf', compact('keuangan', 'pengeluaran', 'totalPemasukan', 'totalPengeluaran', 'saldo'))
             ->setPaper('a4', 'landscape');
 
         return $pdf->download('rekap-keuangan-qurban.pdf');

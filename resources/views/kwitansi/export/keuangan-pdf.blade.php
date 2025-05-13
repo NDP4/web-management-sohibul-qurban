@@ -28,6 +28,9 @@
             text-align: right;
             font-weight: bold;
         }
+        .text-right {
+            text-align: right;
+        }
     </style>
 </head>
 <body>
@@ -37,45 +40,63 @@
         <p>Tahun 1446 H / 2025 M</p>
     </div>
 
+    <h3>Pemasukan</h3>
     <table>
         <thead>
             <tr>
                 <th>No</th>
                 <th>Tanggal</th>
-                <th>No Kwitansi</th>
                 <th>Nama Sohibul</th>
-                <th>Jenis Hewan</th>
-                <th>Tipe</th>
                 <th>Nominal</th>
             </tr>
         </thead>
         <tbody>
-            @php $total = 0; @endphp
-            @foreach($keuangan as $index => $data)
-            @php $total += $data->nominal; @endphp
+            @foreach($keuangan as $index => $item)
             <tr>
                 <td>{{ $index + 1 }}</td>
-                <td>{{ $data->tanggal_pembayaran->format('d/m/Y') }}</td>
-                <td>{{ $data->nomor_kwitansi }}</td>
-                <td>{{ $data->sohibulQurban->nama_sohibul }}</td>
-                <td>{{ ucfirst($data->sohibulQurban->jenis_hewan) }}</td>
-                <td>
-                    @if($data->sohibulQurban->jenis_hewan == 'sapi')
-                        {{ $data->sohibulQurban->is_collective ? 'Kolektif (1/7)' : 'Individual' }}
-                    @else
-                        Individual
-                    @endif
-                </td>
-                <td align="right">Rp {{ number_format($data->nominal, 0, ',', '.') }}</td>
+                <td>{{ \Carbon\Carbon::parse($item->tanggal_pembayaran)->format('d/m/Y') }}</td>
+                <td>{{ $item->sohibulQurban->nama_sohibul }}</td>
+                <td class="text-right">Rp {{ number_format($item->nominal, 0, ',', '.') }}</td>
             </tr>
             @endforeach
-        </tbody>
-        <tfoot>
-            <tr>
-                <td colspan="6" align="right"><strong>Total Pembayaran:</strong></td>
-                <td align="right"><strong>Rp {{ number_format($total, 0, ',', '.') }}</strong></td>
+            <tr class="total">
+                <td colspan="3" class="text-right">Total Pemasukan:</td>
+                <td class="text-right">Rp {{ number_format($totalPemasukan, 0, ',', '.') }}</td>
             </tr>
-        </tfoot>
+        </tbody>
+    </table>
+
+    <h3>Pengeluaran</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Tanggal</th>
+                <th>Keterangan</th>
+                <th>Jumlah</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($pengeluaran as $index => $item)
+            <tr>
+                <td>{{ $index + 1 }}</td>
+                <td>{{ $item->created_at->format('d/m/Y') }}</td>
+                <td>{{ $item->keterangan }}</td>
+                <td class="text-right">Rp {{ number_format($item->jumlah, 0, ',', '.') }}</td>
+            </tr>
+            @endforeach
+            <tr class="total">
+                <td colspan="3" class="text-right">Total Pengeluaran:</td>
+                <td class="text-right">Rp {{ number_format($totalPengeluaran, 0, ',', '.') }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table>
+        <tr class="total">
+            <td colspan="3" class="text-right">Saldo:</td>
+            <td class="text-right" style="width: 150px;">Rp {{ number_format($saldo, 0, ',', '.') }}</td>
+        </tr>
     </table>
 </body>
 </html>
