@@ -34,6 +34,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/sohibul-qurban/export/excel', [KwitansiController::class, 'exportSohibulQurbanExcel'])->name('sohibul-qurban.export.excel');
     Route::get('/keuangan/export/pdf', [KwitansiController::class, 'exportKeuanganPDF'])->name('keuangan.export.pdf');
     Route::get('/keuangan/export/excel', [KwitansiController::class, 'exportKeuanganExcel'])->name('keuangan.export.excel');
+
+    Route::get('/pengeluaran', [App\Http\Controllers\PengeluaranController::class, 'index'])->name('pengeluaran.index');
+    Route::get('/pengeluaran/create', [App\Http\Controllers\PengeluaranController::class, 'create'])->name('pengeluaran.create');
+    Route::post('/pengeluaran', [App\Http\Controllers\PengeluaranController::class, 'store'])->name('pengeluaran.store');
 });
 
 require __DIR__ . '/auth.php';
