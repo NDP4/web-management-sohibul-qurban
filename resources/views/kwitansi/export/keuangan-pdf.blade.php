@@ -62,8 +62,8 @@
             </tr>
             @endforeach
             <tr class="total">
-                <td colspan="3" class="text-right">Total Pemasukan:</td>
-                <td class="text-right">Rp {{ number_format($totalPemasukan, 0, ',', '.') }}</td>
+                <td colspan="4" class="text-right"><strong>Total Pemasukan:</strong></td>
+                <td class="text-right"><strong>Rp {{ number_format($totalPemasukan, 0, ',', '.') }}</strong></td>
             </tr>
         </tbody>
     </table>
@@ -82,7 +82,7 @@
             @foreach($pengeluaran as $index => $item)
             <tr>
                 <td>{{ $index + 1 }}</td>
-                <td>{{ $item->created_at->format('d/m/Y') }}</td>
+                <td>{{ \Carbon\Carbon::parse($item->tanggal_pengeluaran)->format('d/m/Y') }}</td>
                 <td>{{ $item->keterangan }}</td>
                 <td class="text-right">Rp {{ number_format($item->jumlah, 0, ',', '.') }}</td>
             </tr>

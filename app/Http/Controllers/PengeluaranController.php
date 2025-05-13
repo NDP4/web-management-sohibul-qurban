@@ -25,6 +25,7 @@ class PengeluaranController extends Controller
         $request->validate([
             'keterangan' => 'required',
             'jumlah' => 'required|numeric',
+            'tanggal_pengeluaran' => 'required|date',
             'bukti' => 'required'
         ]);
 
@@ -32,6 +33,7 @@ class PengeluaranController extends Controller
             $pengeluaran = Pengeluaran::create([
                 'keterangan' => $request->keterangan,
                 'jumlah' => $request->jumlah,
+                'tanggal_pengeluaran' => $request->tanggal_pengeluaran ?? now(),
                 'bukti_path' => $request->bukti
             ]);
 
