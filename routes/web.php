@@ -38,6 +38,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/pengeluaran', [App\Http\Controllers\PengeluaranController::class, 'index'])->name('pengeluaran.index');
     Route::get('/pengeluaran/create', [App\Http\Controllers\PengeluaranController::class, 'create'])->name('pengeluaran.create');
     Route::post('/pengeluaran', [App\Http\Controllers\PengeluaranController::class, 'store'])->name('pengeluaran.store');
+    Route::get('/pengeluaran/{pengeluaran}/edit', [App\Http\Controllers\PengeluaranController::class, 'edit'])->name('pengeluaran.edit');
+    Route::put('/pengeluaran/{pengeluaran}', [App\Http\Controllers\PengeluaranController::class, 'update'])->name('pengeluaran.update');
+    Route::delete('/pengeluaran/{pengeluaran}', [App\Http\Controllers\PengeluaranController::class, 'destroy'])->name('pengeluaran.destroy');
 });
 
 require __DIR__ . '/auth.php';
