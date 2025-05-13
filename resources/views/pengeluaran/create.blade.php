@@ -1,61 +1,52 @@
-@extends('layouts.app')
+@section('title', 'Tambah Pengeluaran')
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Tambah Pengeluaran</div>
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="text-xl font-semibold leading-tight text-gray-100">
+            {{ __('Tambah Pengeluaran') }}
+        </h2>
+    </x-slot>
 
-                <div class="card-body">
+    <div class="py-12">
+        <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+            <div class="overflow-hidden bg-gray-800 shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-100">
                     <form method="POST" action="{{ route('pengeluaran.store') }}" enctype="multipart/form-data">
                         @csrf
 
-                        <div class="form-group">
-                            <label for="keterangan">Keterangan</label>
-                            <input type="text" class="form-control @error('keterangan') is-invalid @enderror"
-                                   id="keterangan" name="keterangan" value="{{ old('keterangan') }}" required>
-                            @error('keterangan')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
+                        <div class="grid grid-cols-1 gap-6">
+                            <div>
+                                <x-input-label for="keterangan" value="Keterangan" class="text-gray-300" />
+                                <x-text-input id="keterangan" name="keterangan" type="text" class="block w-full mt-1"
+                                    value="{{ old('keterangan') }}" required />
+                                <x-input-error class="mt-2" :messages="$errors->get('keterangan')" />
+                            </div>
 
-                        <div class="form-group">
-                            <label for="jumlah">Jumlah (Rp)</label>
-                            <input type="number" class="form-control @error('jumlah') is-invalid @enderror"
-                                   id="jumlah" name="jumlah" value="{{ old('jumlah') }}" required>
-                            @error('jumlah')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
+                            <div>
+                                <x-input-label for="jumlah" value="Jumlah (Rp)" class="text-gray-300" />
+                                <x-text-input id="jumlah" name="jumlah" type="number" class="block w-full mt-1"
+                                    value="{{ old('jumlah') }}" required />
+                                <x-input-error class="mt-2" :messages="$errors->get('jumlah')" />
+                            </div>
 
-                        <div class="form-group">
-                            <label for="bukti">Bukti Pengeluaran</label>
-                            <input type="file" class="form-control @error('bukti') is-invalid @enderror"
-                                   id="bukti" name="bukti" required>
-                            @error('bukti')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
+                            <div>
+                                <x-input-label for="bukti" value="Bukti Pengeluaran" class="text-gray-300" />
+                                <input type="file" name="bukti" id="bukti" class="filepond" accept="image/*, application/pdf" />
+                                <x-input-error class="mt-2" :messages="$errors->get('bukti')" />
+                            </div>
 
-                        <div class="form-group mb-0">
-                            <button type="submit" class="btn btn-primary">
-                                Simpan
-                            </button>
-                            <a href="{{ route('pengeluaran.index') }}" class="btn btn-secondary">
-                                Kembali
-                            </a>
+                            <div class="flex items-center justify-start gap-4">
+                                <x-primary-button>
+                                    {{ __('Simpan') }}
+                                </x-primary-button>
+                                <a href="{{ route('pengeluaran.index') }}" class="px-4 py-2 text-sm text-gray-700 bg-white border border-gray-300 rounded-md dark:text-gray-300 dark:border-gray-600 dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700">
+                                    {{ __('Kembali') }}
+                                </a>
+                            </div>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-</div>
-@endsection
+</x-app-layout>
