@@ -25,16 +25,19 @@ class PengeluaranController extends Controller
         $request->validate([
             'keterangan' => 'required',
             'jumlah' => 'required|numeric',
-            'drive_file_id' => 'required'
+            'bukti' => 'required'
         ]);
 
         try {
             $pengeluaran = Pengeluaran::create([
                 'keterangan' => $request->keterangan,
                 'jumlah' => $request->jumlah,
-                'bukti_path' => $request->drive_file_id
+                'bukti_path' => $request->bukti
             ]);
 
-        return redirect()->route('pengeluaran.index')->with('success', 'Data pengeluaran berhasil ditambahkan');
+            return redirect()->route('pengeluaran.index')->with('success', 'Data pengeluaran berhasil ditambahkan');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Terjadi kesalahan saat menyimpan data: ' . $e->getMessage());
+        }
     }
 }
