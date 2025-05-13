@@ -42,4 +42,45 @@ class PengeluaranController extends Controller
             return back()->with('error', 'Terjadi kesalahan saat menyimpan data: ' . $e->getMessage());
         }
     }
+
+    public function edit(Pengeluaran $pengeluaran)
+    {
+        return view('pengeluaran.edit', compact('pengeluaran'));
+    }
+
+    public function update(Request $request, Pengeluaran $pengeluaran)
+    {
+        $request->validate([
+            'keterangan' => 'required',
+            'jumlah' => 'required|numeric',
+            'tanggal_pengeluaran' => 'required|date',
+        ]);
+
+        try {
+            $data = [
+                'keterangan' => $request->keterangan,
+                'jumlah' => $request->jumlah,
+                'tanggal_pengeluaran' => $request->tanggal_pengeluaran
+            ];
+
+            if ($request->bukti) {
+                $data['bukti_path'] = $request->bukti;
+            }
+
+            $pengeluaran->update($data);
+            return redirect()->route('pengeluaran.index')->with('success', 'Data pengeluaran berhasil diperbarui');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Terjadi kesalahan saat memperbarui data: ' . $e->getMessage());
+        }
+    }
+
+    public function destroy(Pengeluaran $pengeluaran)
+    {
+        try {
+            $pengeluaran->delete();
+            return redirect()->route('pengeluaran.index')->with('success', 'Data pengeluaran berhasil dihapus');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Terjadi kesalahan saat menghapus data: ' . $e->getMessage());
+        }
+    }
 }

@@ -37,11 +37,21 @@
                                 @foreach($pengeluarans as $index => $pengeluaran)
                                 <tr>
                                     <td class="px-6 py-4 whitespace-nowrap">{{ $index + 1 }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap">{{ $pengeluaran->created_at->format('d/m/Y') }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">{{ Carbon\Carbon::parse($pengeluaran->tanggal_pengeluaran)->format('d/m/Y') }}</td>
                                     <td class="px-6 py-4">{{ $pengeluaran->keterangan }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap">Rp {{ number_format($pengeluaran->jumlah, 0, ',', '.') }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <a href="{{ $pengeluaran->bukti_path }}" target="_blank" class="text-blue-500 hover:text-blue-600">Lihat Bukti</a>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex space-x-2">
+                                            <a href="{{ route('pengeluaran.edit', $pengeluaran->id) }}" class="px-3 py-1 text-sm text-white bg-blue-500 rounded hover:bg-blue-600">Edit</a>
+                                            <form action="{{ route('pengeluaran.destroy', $pengeluaran->id) }}" method="POST" class="inline" onsubmit="return confirm('Yakin ingin menghapus data ini?');">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="px-3 py-1 text-sm text-white bg-red-500 rounded hover:bg-red-600">Hapus</button>
+                                            </form>
+                                        </div>
                                     </td>
                                 </tr>
                                 @endforeach
