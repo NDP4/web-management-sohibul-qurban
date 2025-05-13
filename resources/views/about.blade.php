@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>About - {{ config('app.name') }}</title>
+    <link rel="icon" href="{{ asset('favicon.svg') }}" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700&display=swap" rel="stylesheet" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         .fade-in {
@@ -15,8 +18,8 @@
         }
     </style>
 </head>
-<body class="antialiased bg-gray-100 dark:bg-gray-900">
-    <div class="min-h-screen">
+<body class="antialiased">
+    <div class="relative min-h-screen bg-gray-100 dark:bg-gray-900">
         <!-- Navigation -->
         <nav class="fixed z-50 w-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-md">
             <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -30,6 +33,13 @@
                     <div class="flex items-center space-x-4">
                         <a href="/about" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">About</a>
                         <a href="/terms" class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">Terms</a>
+                        @if (Route::has('login'))
+                            @auth
+                                <a href="{{ url('/dashboard') }}" class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700">Dashboard</a>
+                            @else
+                                <a href="{{ route('login') }}" class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md dark:border-gray-600 dark:text-gray-300 dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700">Login Panitia</a>
+                            @endauth
+                        @endif
                     </div>
                 </div>
             </div>
@@ -105,6 +115,27 @@
                 </div>
             </div>
         </div>
+
+        <!-- Footer -->
+        <footer class="bg-gray-50 dark:bg-gray-800">
+            <div class="px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-2">
+                        <x-application-logo class="w-auto h-8 text-gray-800 dark:text-gray-200" />
+                        <span class="text-sm text-gray-500 dark:text-gray-400">© {{ date('Y') }} Masjid Ar-Ridho</span>
+                    </div>
+                    <div class="text-sm text-gray-500 dark:text-gray-400">
+                        Developed by corex
+                    </div>
+                </div>
+            </div>
+        </footer>
     </div>
+
+    <script>
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
 </body>
 </html>
