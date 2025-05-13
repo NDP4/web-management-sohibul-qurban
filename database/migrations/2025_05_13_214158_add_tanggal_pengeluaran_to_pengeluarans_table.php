@@ -9,7 +9,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('pengeluarans', function (Blueprint $table) {
-            $table->date('tanggal_pengeluaran')->after('jumlah');
+            $table->date('tanggal_pengeluaran')->nullable()->after('jumlah');
         });
     }
 
