@@ -64,7 +64,7 @@
                             load: null,
                             fetch: null
                         },
-                        name: 'bukti_transfer',
+                        name: element.name, // Use the input's name attribute
                         labelIdle: 'Seret & Lepas file atau <span class="filepond--label-action"> Pilih File</span>',
                         labelFileProcessing: 'Mengupload',
                         labelFileProcessingComplete: 'Upload Selesai',
@@ -145,7 +145,7 @@
             <!-- Page Heading -->
             @if (isset($header))
                 <header class="bg-gray-800 shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
                         {{ $header }}
                     </div>
                 </header>

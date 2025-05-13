@@ -28,12 +28,18 @@ class FileUploadController extends Controller
         try {
             Log::info('Upload request received', $request->all());
 
-            if (!$request->hasFile('bukti_transfer')) {
+            $file = null;
+            if ($request->hasFile('bukti_transfer')) {
+                $file = $request->file('bukti_transfer');
+            } elseif ($request->hasFile('bukti')) {
+                $file = $request->file('bukti');
+            }
+
+            if (!$file) {
                 Log::error('No file in request');
                 return response()->json(['error' => 'No file uploaded'], 400);
             }
 
-            $file = $request->file('bukti_transfer');
             $sohibulName = $request->input('sohibul_name');
             $pengeluaranName = $request->input('pengeluaran_name');
 
