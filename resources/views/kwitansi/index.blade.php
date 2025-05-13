@@ -112,15 +112,15 @@
                                         <td class="px-4 py-3 text-sm text-gray-300">{{ $kwitansi->tanggal_pembayaran->format('d/m/Y') }}</td>
                                         <td class="px-4 py-3 text-sm text-gray-300">Rp {{ number_format($kwitansi->nominal, 0, ',', '.') }}</td>
                                         <td class="px-4 py-3 text-sm text-gray-300">
-                                            <div class="flex space-x-3">
+                                            <div class="flex space-x-3">  <!-- This div controls the spacing -->
                                                 <a href="{{ route('kwitansi.download', $kwitansi->id) }}"
-                                                   class="text-blue-500 hover:text-blue-400">
+                                                class="text-blue-500 hover:text-blue-400">
                                                     Download
                                                 </a>
-                                                @if($kwitansi->bukti_transfer)
-                                                <a href="https://drive.google.com/file/d/{{ $kwitansi->bukti_transfer }}/view"
-                                                   target="_blank"
-                                                   class="text-green-500 hover:text-green-400">
+                                                @if($kwitansi->sohibulQurban->bukti_transfer)
+                                                <a href="https://drive.google.com/file/d/{{ $kwitansi->sohibulQurban->bukti_transfer }}/view"
+                                                target="_blank"
+                                                class="text-green-500 hover:text-green-400">
                                                     Lihat Bukti
                                                 </a>
                                                 @endif
