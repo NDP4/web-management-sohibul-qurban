@@ -11,6 +11,7 @@ class Pengeluaran extends Model
     protected $fillable = [
         'keterangan',
         'jumlah',
+        'tanggal_pengeluaran',
         'bukti_path'
     ];
 }

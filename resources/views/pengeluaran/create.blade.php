@@ -23,6 +23,13 @@
                             </div>
 
                             <div>
+                                <x-input-label for="tanggal_pengeluaran" value="Tanggal Pengeluaran" class="text-gray-300" />
+                                <x-text-input id="tanggal_pengeluaran" name="tanggal_pengeluaran" type="date" class="block w-full mt-1"
+                                    value="{{ old('tanggal_pengeluaran') ?? date('Y-m-d') }}" required />
+                                <x-input-error class="mt-2" :messages="$errors->get('tanggal_pengeluaran')" />
+                            </div>
+
+                            <div>
                                 <x-input-label for="jumlah" value="Jumlah (Rp)" class="text-gray-300" />
                                 <x-text-input id="jumlah" name="jumlah" type="number" class="block w-full mt-1"
                                     value="{{ old('jumlah') }}" required />
@@ -50,16 +57,27 @@
                                     const submitBtn = document.getElementById('submitBtn');
                                     const form = document.querySelector('form');
                                     const keterangan = document.getElementById('keterangan');
+                                    const jumlah = document.getElementById('jumlah');
 
-                                    // Enable submit button only when file is uploaded and keterangan is filled
+                                    // Enable submit button when all required fields are filled
                                     function checkForm() {
                                         const driveFileId = document.querySelector('input[name="drive_file_id"]').value;
                                         const keteranganValue = keterangan.value.trim();
-                                        submitBtn.disabled = !driveFileId || !keteranganValue;
+                                        const jumlahValue = jumlah.value.trim();
+                                        submitBtn.disabled = !driveFileId || !keteranganValue || !jumlahValue;
                                     }
 
                                     keterangan.addEventListener('input', checkForm);
+                                    jumlah.addEventListener('input', checkForm);
+
+                                    // FilePond event handler
+                                    document.querySelector('.filepond').addEventListener('FilePond:processfile', (e) => {
+                                        const fileId = e.detail.file.serverId;
+                                        document.querySelector('input[name="drive_file_id"]').value = fileId;
+                                        checkForm();
+                                    });
                                 });
+                            </script>
                         </div>
                     </form>
                 </div>
