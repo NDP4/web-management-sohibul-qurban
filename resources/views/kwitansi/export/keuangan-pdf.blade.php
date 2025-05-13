@@ -45,6 +45,7 @@
         <thead>
             <tr>
                 <th>No</th>
+                <th>No. Kwitansi</th>
                 <th>Tanggal</th>
                 <th>Nama Sohibul</th>
                 <th>Nominal</th>
@@ -54,6 +55,7 @@
             @foreach($keuangan as $index => $item)
             <tr>
                 <td>{{ $index + 1 }}</td>
+                <td>{{ $item->nomor_kwitansi }}</td>
                 <td>{{ \Carbon\Carbon::parse($item->tanggal_pembayaran)->format('d/m/Y') }}</td>
                 <td>{{ $item->sohibulQurban->nama_sohibul }}</td>
                 <td class="text-right">Rp {{ number_format($item->nominal, 0, ',', '.') }}</td>
