@@ -39,13 +39,13 @@
             <!-- Content -->
             <div class="px-4 pt-32 pb-16 mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div class="overflow-hidden bg-white shadow-xl dark:bg-gray-800 sm:rounded-lg">
-                    <div class="p-8">
-                        <div class="animate-fade-in">
-                            <h1 class="text-3xl font-bold text-gray-900 dark:text-white">
+                    <div class="p-8 md:p-12">
+                        <div class="animate-fade-in max-w-3xl mx-auto">
+                            <h1 class="text-4xl font-bold text-gray-900 dark:text-white text-center mb-8">
                                 Terms and Conditions
                             </h1>
 
-                            <div class="mt-8 space-y-6 text-gray-600 dark:text-gray-300">
+                            <div class="mt-12 space-y-8 text-gray-600 dark:text-gray-300">
                                 <div>
                                     <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Software Development and Ownership</h2>
                                     <p class="mt-3">

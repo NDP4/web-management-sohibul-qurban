@@ -49,24 +49,24 @@
         <div class="pt-32 pb-16">
             <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div class="text-center fade-in">
-                    <h1 class="text-4xl font-bold text-gray-900 dark:text-white sm:text-5xl">
+                    <h1 class="text-4xl font-bold text-gray-900 dark:text-white sm:text-5xl lg:text-6xl">
                         About <span class="text-blue-600">Corex</span>
                     </h1>
-                    <p class="mt-4 text-lg text-gray-600 dark:text-gray-400">
-                        Developing innovative solutions for web and mobile applications
+                    <p class="max-w-3xl mx-auto mt-6 text-lg text-gray-600 dark:text-gray-400 sm:text-xl">
+                        Developing innovative solutions for web and mobile applications with a focus on quality and user experience
                     </p>
                 </div>
             </div>
         </div>
 
         <!-- About Content -->
-        <div class="py-16 bg-white dark:bg-gray-800">
+        <div class="py-20 bg-white dark:bg-gray-800">
             <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div class="grid gap-12 md:grid-cols-2">
                     <!-- Company Info -->
-                    <div class="fade-in" style="animation-delay: 0.2s">
-                        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Our Story</h2>
-                        <p class="mt-4 text-gray-600 dark:text-gray-400">
+                    <div class="p-8 fade-in bg-gray-50 dark:bg-gray-700/50 rounded-xl" style="animation-delay: 0.2s">
+                        <h2 class="mb-6 text-2xl font-bold text-gray-900 dark:text-white">Our Story</h2>
+                        <p class="text-lg leading-relaxed text-gray-600 dark:text-gray-300">
                             Corex is a leading software development company specializing in creating modern web applications
                             and mobile solutions. Founded by Nur Dwi Priyambodo, we are committed to delivering high-quality,
                             user-centric applications that meet our clients' needs.
@@ -74,44 +74,50 @@
                     </div>
 
                     <!-- Services -->
-                    <div class="fade-in" style="animation-delay: 0.4s">
-                        <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Our Services</h2>
-                        <ul class="mt-4 space-y-4">
-                            <li class="flex items-start">
-                                <svg class="w-6 h-6 mt-1 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                <span class="ml-2 text-gray-600 dark:text-gray-400">Web Application Development</span>
+                    <div class="p-8 fade-in bg-gray-50 dark:bg-gray-700/50 rounded-xl" style="animation-delay: 0.4s">
+                        <h2 class="mb-6 text-2xl font-bold text-gray-900 dark:text-white">Our Services</h2>
+                        <ul class="space-y-6">
+                            <li class="flex items-center space-x-4">
+                                <div class="flex-shrink-0 p-2 bg-blue-100 rounded-lg dark:bg-blue-900/50">
+                                    <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-gray-900 dark:text-white">Web Development</h3>
+                                    <p class="text-gray-600 dark:text-gray-300">Custom web applications and solutions</p>
+                                </div>
                             </li>
-                            <li class="flex items-start">
-                                <svg class="w-6 h-6 mt-1 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                <span class="ml-2 text-gray-600 dark:text-gray-400">Mobile Android Development</span>
-                            </li>
-                            <li class="flex items-start">
-                                <svg class="w-6 h-6 mt-1 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                <span class="ml-2 text-gray-600 dark:text-gray-400">Custom Software Solutions</span>
+                            <li class="flex items-center space-x-4">
+                                <div class="flex-shrink-0 p-2 bg-blue-100 rounded-lg dark:bg-blue-900/50">
+                                    <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-gray-900 dark:text-white">Mobile Development</h3>
+                                    <p class="text-gray-600 dark:text-gray-300">Android app development and solutions</p>
+                                </div>
                             </li>
                         </ul>
                     </div>
                 </div>
 
                 <!-- Contact Section -->
-                <div class="mt-16 text-center fade-in" style="animation-delay: 0.6s">
-                    <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Let's Work Together</h2>
-                    <p class="mt-4 text-gray-600 dark:text-gray-400">
-                        Interested in collaborating? Get in touch with us!
-                    </p>
-                    <a href="mailto:nurdwipriyambodo@ndp.my.id"
-                       class="inline-flex items-center px-6 py-3 mt-6 text-lg font-medium text-white transition-colors duration-200 bg-blue-600 rounded-lg hover:bg-blue-700">
-                        Contact Us
-                        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                        </svg>
-                    </a>
+                <div class="mt-20 fade-in" style="animation-delay: 0.6s">
+                    <div class="p-12 text-center bg-blue-50 dark:bg-blue-900/20 rounded-2xl">
+                        <h2 class="mb-6 text-3xl font-bold text-gray-900 dark:text-white">Let's Work Together</h2>
+                        <p class="max-w-2xl mx-auto mb-8 text-lg text-gray-600 dark:text-gray-300">
+                            Ready to start your next project? Get in touch with us to discuss how we can help bring your ideas to life.
+                        </p>
+                        <a href="mailto:nurdwipriyambodo@ndp.my.id"
+                           class="inline-flex items-center px-8 py-4 text-lg font-medium text-white transition-colors duration-200 bg-blue-600 rounded-xl hover:bg-blue-700">
+                            <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                            </svg>
+                            Contact Us
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
